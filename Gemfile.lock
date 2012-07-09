@@ -1,3 +1,13 @@
+PATH
+  remote: .
+  specs:
+    eloqua (1.0.0)
+      activemodel
+      activesupport (= 3.0.6)
+      builder
+      i18n (= 0.5.0)
+      savon
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -46,14 +56,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel
-  activesupport
-  builder
   ci_reporter
+  eloqua!
   flexmock
-  rspec (> 2.0)
+  rspec
   ruby-fsevent
-  savon
   savon_spec
   timecop
   watchr
