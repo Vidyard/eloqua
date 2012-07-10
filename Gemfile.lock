@@ -16,9 +16,11 @@ GEM
       builder (~> 2.1.2)
       i18n (~> 0.5.0)
     activesupport (3.0.6)
+    archive-tar-minitar (0.5.2)
     builder (2.1.2)
     ci_reporter (1.6.4)
       builder (>= 2.1.2)
+    columnize (0.3.6)
     crack (0.1.8)
     diff-lcs (1.1.2)
     flexmock (0.9.0)
@@ -28,6 +30,8 @@ GEM
       ntlm-http (>= 0.1.1)
       rack
     i18n (0.5.0)
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     mocha (0.9.12)
     ntlm-http (0.1.1)
     rack (1.2.2)
@@ -39,7 +43,17 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
     ruby-fsevent (0.2.1)
+    ruby_core_source (0.1.5)
+      archive-tar-minitar (>= 0.5.2)
     savon (0.8.6)
       builder (>= 2.1.2)
       crack (~> 0.1.8)
@@ -60,6 +74,7 @@ DEPENDENCIES
   eloqua!
   flexmock
   rspec
+  ruby-debug19
   ruby-fsevent
   savon_spec
   timecop

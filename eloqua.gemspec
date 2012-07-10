@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
                        s.add_runtime_dependency 'i18n', '= 0.5.0'
                        s.add_development_dependency 'watchr'
                        s.add_development_dependency 'ruby-fsevent'
+                       s.add_development_dependency 'ruby-debug19'
                        s.add_development_dependency 'savon_spec'
                        s.add_development_dependency 'rspec'
                        s.add_development_dependency 'flexmock'
