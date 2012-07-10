@@ -18,7 +18,8 @@ module Eloqua
     WSDL = {
       :service => File.dirname(__FILE__) + '/wsdl/service.wsdl',
       :data =>  File.dirname(__FILE__) + '/wsdl/data.wsdl',
-      :email =>  File.dirname(__FILE__) + '/wsdl/email.wsdl'
+      :email =>  File.dirname(__FILE__) + '/wsdl/email.wsdl',
+      :action =>  File.dirname(__FILE__) + '/wsdl/action.wsdl'
     }
 
     class << self
@@ -39,10 +40,11 @@ module Eloqua
         @@clients
       end
 
-      # There are three wsdl types for eloqua
+      # There are four currently supported wsdl types for eloqua
       # 1. Service
       # 2. Data
       # 3. Email
+      # 4. External Action
       def client(type)
         if(!Eloqua.user || !Eloqua.password)
           raise('Eloqua.user or Eloqua.password is not set see Eloqua.authenticate')
@@ -67,7 +69,7 @@ module Eloqua
 
       def request(type, name, soap_body = nil, &block)
         result = send_remote_request(type, name, soap_body, &block)
-        
+
         self.last_request = client(type).soap.to_xml if client(type).soap
         self.last_response = result.to_xml if result.respond_to?(:to_xml)
 
