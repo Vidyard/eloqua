@@ -8,3 +8,4 @@ doc
 test.rb
 spec/reports
 *.gem
+.rvmrc
