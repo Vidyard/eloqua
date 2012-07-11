@@ -1,4 +1,5 @@
 require 'eloqua/api'
+require 'ruby-debug'
 
 module Eloqua
 
@@ -14,12 +15,16 @@ module Eloqua
 
         def get_member_count_in_step_by_status(stepId, status)
           xml_query = builder do |xml|
-            xml.:object_type, stepId)
-            xml.template!(:object_type, status)
+            debugger
+            xml.tag!(:stepId, stepId)
+            xml.tag!(:status, status)
           end
-          results = request(:get_member_count_in_step_by_status. xml_query)
+          results = request(:get_member_count_in_step_by_status, xml_query)
         end
 
+        def request(*args)
+          Eloqua::Api.request(:action, *args)
+        end
       end
     end
   end
