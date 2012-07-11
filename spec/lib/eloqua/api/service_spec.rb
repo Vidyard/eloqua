@@ -247,7 +247,7 @@ shared_examples_for "operations for entity and asset" do |group, type|
 
       end
     end
-    
+
     context 'find_object without a result' do
 
       before do
@@ -266,7 +266,7 @@ shared_examples_for "operations for entity and asset" do |group, type|
 end
 
 describe Eloqua::Api::Service do
-  
+
   subject { Eloqua::Api::Service }
 
   let(:email) { 'test@email.com' }
@@ -392,21 +392,21 @@ describe Eloqua::Api::Service do
 
   context "#self.list_types" do
     let(:remote_method) { "list_#{group}_types".to_sym }
-    
+
     before do
       mock_eloqua_request(remote_method, :success).with(:service, remote_method, nil)
     end
-        
+
     it 'should return results as an array' do
       result = subject.list_types(group)
       result.class.should == Array
     end
-        
+
   end
-    
+
   context "#self.describe" do
-    let(:remote_method) { "describe_#{group}".to_sym }    
-    
+    let(:remote_method) { "describe_#{group}".to_sym }
+
     let(:xml_body) do
       xml! do |xml|
         xml.object_type_lower!(group) do
@@ -414,17 +414,17 @@ describe Eloqua::Api::Service do
         end
       end
     end
-    
+
     before do
       mock_eloqua_request(remote_method, :success).with(:service, remote_method, xml_body)
       @result = subject.describe(group, type)
     end
-    
+
     it 'should have fields in the top level in result as an array' do
       @result.should have_key(:fields)
       @result[:fields].class.should == Array
     end
-    
+
   end
 
   context "#self.describe_type" do
@@ -436,12 +436,12 @@ describe Eloqua::Api::Service do
 
       it "should contain type hash in first element with :id, :name and :type keys" do
         first = @result.first
-  
+
         first.should have_key(:id)
         first.should have_key(:name)
         first.should have_key(:type)
       end
-      
+
     end
 
     context "when group is :asset" do
@@ -469,7 +469,7 @@ describe Eloqua::Api::Service do
 
         @result = subject.describe_type(:entity, 'Base')
       end
-      
+
       it_behaves_like 'will return collection of types'
     end
 

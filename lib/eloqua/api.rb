@@ -11,6 +11,9 @@ module Eloqua
 
   class Api
 
+    autoload :Service, 'eloqua/api/service'
+    autoload :Action, 'eloqua/api/action'
+
     # The namespace for Eloqua Array objects
     XML_NS_ARRAY = 'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
 
