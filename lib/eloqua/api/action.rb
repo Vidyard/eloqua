@@ -15,11 +15,23 @@ module Eloqua
 
         def get_member_count_in_step_by_status(stepId, status)
           xml_query = builder do |xml|
-            debugger
             xml.tag!(:stepId, stepId)
             xml.tag!(:status, status)
           end
           results = request(:get_member_count_in_step_by_status, xml_query)
+          results = results.to_i
+        end
+
+        #still seems finicky, returns a funky hash table if there are no members in that step
+        def list_members_in_step_by_status(stepId, status, pageNumber, pageSize)
+          debugger
+          xml_query = builder do |xml|
+            xml.tag!(:stepId, stepId)
+            xml.tag!(:status, status)
+            xml.tag!(:pageNumber, pageNumber)
+            xml.tag!(:pageSize, pageSize)
+          end
+          results = request(:list_members_in_step_by_status, xml_query)
         end
 
         def request(*args)
