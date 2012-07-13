@@ -1,5 +1,4 @@
 require 'eloqua/api'
-require 'ruby-debug'
 
 module Eloqua
 
@@ -24,7 +23,6 @@ module Eloqua
 
         #still seems finicky, returns a funky hash table if there are no members in that step
         def list_members_in_step_by_status(stepId, status, pageNumber, pageSize)
-          debugger
           xml_query = builder do |xml|
             xml.tag!(:stepId, stepId)
             xml.tag!(:status, status)

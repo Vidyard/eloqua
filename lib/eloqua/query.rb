@@ -88,17 +88,15 @@ module Eloqua
       RUBY
     end
 
-
-                # Clears all conditions added by {on}
-                #
-                #                       query.on(:id, '>', '1')
-                #                       query.clear_conditions!
-                #
-                def clear_conditions!
-                        @has_requested = false
-                        conditions.clear
-                end
-
+    # Clears all conditions added by {on}
+    #
+    #                       query.on(:id, '>', '1')
+    #                       query.clear_conditions!
+    #
+    def clear_conditions!
+      @has_requested = false
+      conditions.clear
+    end
 
     # Adds a condition to the query; may be chained.
     #
@@ -109,7 +107,7 @@ module Eloqua
     # @param [String] value to search for
     # @return self
     def on(field, operator, value)
-                        @has_requested = false
+      @has_requested = false
       @conditions << {
         :field => field,
         :type => operator,
@@ -168,7 +166,7 @@ module Eloqua
 
       if(result[:entities])
         @total_pages = result[:total_pages].to_i
-                                entities = Eloqua.format_results_for_array(result, :entities, :dynamic_entity)
+        entities = Eloqua.format_results_for_array(result, :entities, :dynamic_entity)
         records = entities.inject([]) do |records, entity|
           record_attrs = {}
           entity_id = entity[:id]
@@ -180,7 +178,7 @@ module Eloqua
 
           collection << record_object
         end
-                                collection
+        collection
       else
         @total_pages = 0
         false
@@ -211,21 +209,21 @@ module Eloqua
       @has_requested
     end
 
-                # Sends request if not already set and iterates through result
-                #
-                #                       query.each do |record|
-                #                               record.class # query.remote_object
-                #                       end
-                #
-                # Currently this is a shortcut for
-                #
-                #                       query.all.each do |record|
-                #                               ...
-                #                       end
-                #
-                # @param [Proc] a block iterator
+    # Sends request if not already set and iterates through result
+    #
+    #                       query.each do |record|
+    #                               record.class # query.remote_object
+    #                       end
+    #
+    # Currently this is a shortcut for
+    #
+    #                       query.all.each do |record|
+    #                               ...
+    #                       end
+    #
+    # @param [Proc] a block iterator
     def each(&block)
-                        all.each(&block)
+      all.each(&block)
     end
 
     # Sends request and returns collection
@@ -238,34 +236,34 @@ module Eloqua
       collection
     end
 
-                # Iterates through each page up to max_pages
-                # when max_pages is nil (default) will iterate through
-                # each page yielding a block with a record.
-                #
-                # with max_pages you could and then resume the loop through
-                # pages
-                #
-                #                       query.each_page(2) |record|
-                #                               query.total_pages # 10
-                #                               query.page # 1 ... 2
-                #                       end
-                #
-                #                       ...
-                #
-                #                       query.each_page(2) |record|
-                #                               query.total_pages # 10
-                #                               query.page # 3 ... 4
-                #                       end
-                #
-                # @see Query#each
-                # @param [Integer] max pages to iterate through
+    # Iterates through each page up to max_pages
+    # when max_pages is nil (default) will iterate through
+    # each page yielding a block with a record.
+    #
+    # with max_pages you could and then resume the loop through
+    # pages
+    #
+    #                       query.each_page(2) |record|
+    #                               query.total_pages # 10
+    #                               query.page # 1 ... 2
+    #                       end
+    #
+    #                       ...
+    #
+    #                       query.each_page(2) |record|
+    #                               query.total_pages # 10
+    #                               query.page # 3 ... 4
+    #                       end
+    #
+    # @see Query#each
+    # @param [Integer] max pages to iterate through
     def each_page(max_pages = nil, &block)
-                        each(&block)
-                        while(total_pages > page)
-                                break if max_pages && page >= max_pages
-                                page(page + 1)
-                                each(&block)
-                        end
+      each(&block)
+      while(total_pages > page)
+        break if max_pages && page >= max_pages
+        page(page + 1)
+        each(&block)
+      end
     end
 
     protected
