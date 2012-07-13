@@ -1,7 +1,7 @@
 require 'eloqua/api'
 
 module Eloqua
-  
+
   class Api
     class Service
 
@@ -16,7 +16,7 @@ module Eloqua
       class << self
 
         delegate :builder, :remote_type, :to => Eloqua::Api
-        
+
         def entity_association_xml(asset_type, asset_id, entity, entity_id)
           xml_query = builder do |xml|
             xml.template!(:object, :entity, entity, entity_id)

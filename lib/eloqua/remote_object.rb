@@ -15,18 +15,18 @@ module Eloqua
     include ActiveSupport::Callbacks
 
     define_callbacks :save, :update, :create
-    
+
     # Because we never absolutely know what attributes are defined
     # We do not use define_attribute_method for dirty meaning #{attr}_changed? will not work
     # instead use the private methods provided by dirty IE: attribute_changed?(:attr)
     include ActiveModel::Dirty
     include Eloqua::Helper::AttributeMap
-        
+
     DIRTY_PRIVATE_METHODS = [:attribute_was, :attribute_changed?, :attribute_change]
     DIRTY_PRIVATE_METHODS.each {|method| public method }
 
     class_attribute :primary_key, :remote_type, :attribute_types, :remote_group
-    
+
     attr_reader :attributes
 
     self.attribute_types = {}.with_indifferent_access
@@ -45,8 +45,8 @@ module Eloqua
         self, Api::Service, Api::Service.type_methods, [:remote_type]
     )
 
-		delegate :api, :to => self
-      
+    delegate :api, :to => self
+
     # If the remote flag is set to :remote (or true) the object
     # assumes that the attributes are from eloqua directly in their format (IE: C_EmailAddress)
     # it will then format them to a more ruby-ish key (:email_address) and then store the original name
@@ -62,7 +62,6 @@ module Eloqua
       if(@attributes.has_key?(primary_key) && @attributes[primary_key])
         @_persisted = true
       end
-      
     end
 
     def reload
@@ -76,7 +75,7 @@ module Eloqua
         true
       end
     end
-    
+
     def persisted?
       @_persisted ||= false
     end
@@ -88,12 +87,12 @@ module Eloqua
       end
       attributes
     end
-    
+
 
     private :map_attributes, :reverse_map_attributes
-    
+
     # Persistence
-    
+
     def create
       run_callbacks :create do
         attrs = convert_attribute_values(attributes, :export)
@@ -108,19 +107,19 @@ module Eloqua
         end
       end
     end
-    
+
     def update
       run_callbacks :update do
         update_attributes = changed.inject({}) do |map, attr|
           map[attr] = send(attr.to_sym)
           map
-        end      
+        end
         attrs = convert_attribute_values(update_attributes, :export)
         attrs = reverse_map_attributes(attrs)
         self.class.update_object(self.attributes[primary_key].to_i, attrs)
       end
     end
-    
+
     def save(options = {})
       if(valid?)
         run_callbacks :save do
@@ -134,7 +133,7 @@ module Eloqua
 
     # For factory girl
     alias_method :save!, :save
-    
+
     # Updates the attributes in the record with given
     # hash and then saves the object.
     #
@@ -151,24 +150,24 @@ module Eloqua
       end
       save
     end
-    
+
     # Magic
-    
+
     # Monkey Patch. Rails uses a normal array for changed_attributes and
     # relys on method missing to provide the same type all the time
     def changed_attributes
       @changed_attributes ||= {}.with_indifferent_access
     end
-    
+
     def read_attribute(attr)
       attributes[attr]
     end
-    
+
     def write_attribute(attr, value)
       attribute_will_change!(attr) unless read_attribute(attr) == value
       attributes[attr] = value
     end
-    
+
     def is_attribute_method?(method)
       attr = method.to_s.gsub(/\=$/, '')
       if(attributes.has_key?(attr) || attribute_map_reverse.has_key?(attr))
@@ -176,12 +175,12 @@ module Eloqua
       else
         false
       end
-    end    
-    
+    end
+
     def id
       read_attribute(:id)
     end
-        
+
     def method_missing(method, *args)
       attr_method = is_attribute_method?(method)
       attr = method.to_s.gsub(/\=$/, '')
@@ -194,7 +193,7 @@ module Eloqua
         super
       end
     end
-    
+
     def respond_to?(method, *args)
       if(is_attribute_method?(method))
         true
@@ -225,9 +224,9 @@ module Eloqua
     end
 
     class << self
-            
+
       # Attribute types
-      
+
       def attr_type_hash(name)
         {
           :type => name.to_sym,
@@ -267,9 +266,9 @@ module Eloqua
           RUBY
         end
       end
-            
+
     end
 
   end
-    
+
 end
