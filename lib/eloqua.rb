@@ -2,19 +2,19 @@ require 'active_support/core_ext/class'
 require 'active_support/core_ext/module'
 
 module Eloqua
-  
+
   autoload :Api, 'eloqua/api'
   autoload :Entity, 'eloqua/entity'
   autoload :Asset, 'eloqua/asset'
   autoload :RemoteObject, 'eloqua/remote_object'
-	autoload :Query, 'eloqua/query'
-  
+  autoload :Query, 'eloqua/query'
+
   mattr_accessor :user, :password
-  
+
   def self.configure(&block)
     yield self
   end
-  
+
   def self.authenticate(user, password)
     self.user = user
     self.password = password
@@ -47,5 +47,5 @@ module Eloqua
 
   end
 
-  
+
 end
