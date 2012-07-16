@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
                        s.name = 'eloqua'
                        s.version = Eloqua::VERSION
                        s.date = '2012-07-04'
-                       s.authors = ["Brian Jou"]
+                       s.authors = ["Brian Jou", "Ryan Caught", "James Lal"]
                        s.email = 'brian@vidyard.com'
                        s.files = ["lib/eloqua.rb"]
                        s.summary = 'Eloqua API for Ruby'
