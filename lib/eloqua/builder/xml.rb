@@ -8,7 +8,7 @@ module Eloqua
     # the main builder class
     class Xml < ::Builder::XmlMarkup
 
-      include Eloqua::Builder::Templates
+      include ::Eloqua::Builder::Templates
 
       # XML Templates
 
@@ -115,7 +115,7 @@ module Eloqua
 
       # Extend to allow default namespace
       def method_missing(sym, *args, &block)
-        if(@namespace && !args.first.kind_of?(Symbol))
+        if(@namespace && !args.first.kind_of?(::Symbol))
           args.unshift(sym.to_sym)
           sym = @namespace
         end
