@@ -17,7 +17,7 @@ module Eloqua
     # The namespace for Eloqua Array objects
     XML_NS_ARRAY = 'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
 
-    # WSDLs are from 3-30-2011
+    # WSDLs are from 7-16-2012
     WSDL = {
       :service => File.dirname(__FILE__) + '/wsdl/service.wsdl',
       :data =>  File.dirname(__FILE__) + '/wsdl/data.wsdl',
