@@ -4,14 +4,14 @@ require "eloqua/version"
 Gem::Specification.new do |s|
                        s.name = 'eloqua'
                        s.version = Eloqua::VERSION
-                       s.date = '2012-07-04'
+                       s.date = '2012-07-23'
                        s.authors = ["Brian Jou", "Ryan Caught", "James Lal"]
                        s.email = 'brian@vidyard.com'
                        s.files = ["lib/eloqua.rb"]
                        s.summary = 'Eloqua API for Ruby'
                        s.description = 'An Eloqua API Wrapper for Ruby'
 
-                       s.add_runtime_dependency 'savon'
+                       s.add_runtime_dependency 'savon', '=0.8.6'
                        s.add_runtime_dependency 'builder'
                        s.add_runtime_dependency 'activemodel'
                        s.add_runtime_dependency 'activesupport', '>= 3.0.6'

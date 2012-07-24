@@ -6,7 +6,7 @@ PATH
       activesupport (>= 3.0.6)
       builder
       i18n (>= 0.5.0)
-      savon
+      savon (= 0.8.6)
 
 GEM
   remote: http://rubygems.org/

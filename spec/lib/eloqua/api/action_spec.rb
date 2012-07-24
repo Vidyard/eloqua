@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'eloqua/api/action'
-require 'ruby-debug'
 
 describe Eloqua::Api::Action do
   subject { Eloqua::Api::Action }
