@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
                        s.files = ["lib/eloqua.rb"]
                        s.summary = 'Eloqua API for Ruby'
                        s.description = 'An Eloqua API Wrapper for Ruby'
+                       s.homepage = 'https://github.com/Vidyard/eloqua'
 
                        s.add_runtime_dependency 'savon', '=0.8.6'
                        s.add_runtime_dependency 'builder'
