@@ -17,9 +17,9 @@ module Eloqua
       define_builder_template :array do |xml, array|
         array.each do |element|
           tag = 'string'
-          if(element.is_a?(String))
+          if(element.is_a?(::String))
             tag = 'string'
-          elsif(element.is_a?(Numeric))
+          elsif(element.is_a?(::Numeric))
             tag = 'int'
           end
           xml.arr(tag.to_sym, element)
@@ -28,7 +28,7 @@ module Eloqua
 
       define_builder_template :int_array do |xml, array|
         array.each do |element|
-          unless(element.is_a?(Numeric))
+          unless(element.is_a?(::Numeric))
             element = element.to_i
             if(element == 0 || !element)
               next
@@ -94,7 +94,7 @@ module Eloqua
       end
 
       def template!(template, *args)
-        builder_template(template, *args).call(self)
+        ::Eloqua::Builder::Xml.builder_template(template, *args).call(self)
       end
 
       def dynamic_object!(sym, *args, &block)
