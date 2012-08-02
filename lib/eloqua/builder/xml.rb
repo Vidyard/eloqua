@@ -38,6 +38,18 @@ module Eloqua
         end
       end
 
+      define_builder_template :member_array do |xml, array|
+        array.each do |element|
+          xml.tag!("Member") do
+            xml.EntityId(element[:entity_id])
+            xml.EntityType(element[:entity_type])
+            xml.Id(element[:id])
+            xml.Status(element[:status])
+            xml.StepId(element[:step_id])
+          end
+        end
+      end
+
       # For use with add/remove membership
       define_builder_template :object do |xml, object_type, type, id|
         xml.tag!(object_type) do

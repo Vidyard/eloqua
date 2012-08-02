@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    eloqua (1.1.3)
+    eloqua (1.2.0)
       activemodel
       activesupport (>= 3.0.6)
       builder

@@ -32,6 +32,16 @@ module Eloqua
           results = request(:list_members_in_step_by_status, xml_query)
         end
 
+        def set_member_status(arrayOfMember, status)
+          xml_query = builder do |xml|
+            xml.tag!("members") do
+              xml.template!(:member_array, arrayOfMember)
+            end
+            xml.tag!(:status, status)
+          end
+          results = request(:set_member_status, xml_query)
+        end
+
         def request(*args)
           Eloqua::Api.request(:action, *args)
         end
