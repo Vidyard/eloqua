@@ -52,7 +52,7 @@ module Eloqua
         if(!Eloqua.user || !Eloqua.password)
           raise('Eloqua.user or Eloqua.password is not set see Eloqua.authenticate')
         end
-        clients[type] ||= Savon::Client.new do
+        clients[type] = Savon::Client.new do
           wsdl.document = WSDL[type]
           wsse.credentials Eloqua.user, Eloqua.password
         end
