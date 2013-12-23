@@ -41,7 +41,7 @@ RSpec.configure do |config|
     if(File.exist?(initializer))
       load initializer
     else
-      Eloqua.authenticate('company\\user', 'pass')
+      Eloqua.authenticate('company\\user', 'pass', 'domain')
     end
   end
 

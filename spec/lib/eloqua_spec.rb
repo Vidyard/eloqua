@@ -22,7 +22,7 @@ class EloquaSpecReceving
 end
 
 describe Eloqua do
-  
+
   context '#self.configure' do
     it 'should provide self' do
       save = nil
@@ -31,20 +31,23 @@ describe Eloqua do
       end
     end
   end
-  
+
   context '#self.authenticate' do
     before do
-      Eloqua.authenticate('user', 'pass')
+      Eloqua.authenticate('user', 'pass', 'domain')
     end
-    
+
     it 'should have set username to user' do
       Eloqua.user.should == 'user'
     end
-    
+
     it 'should have set password to pass' do
       Eloqua.password.should == 'pass'
     end
-    
+
+    it 'should have set domain to domain' do
+      Eloqua.domain.should == 'domain'
+    end
   end
 
   context "#self.format_results_for_array" do

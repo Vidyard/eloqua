@@ -25,6 +25,13 @@ module Eloqua
       :action =>  File.dirname(__FILE__) + '/wsdl/action.wsdl'
     }
 
+    ENDPOINT_PATH = {
+      :service => '/API/1.2/Service.svc',
+      :data =>  '/API/1.2/DataTransferService.svc',
+      :email =>  '/API/1.2/EmailService.svc',
+      :action =>  '/API/1.2/ExternalActionService.svc'
+    }
+
     class << self
 
       delegate :define_builder_template, :to => Eloqua::Builder::Xml
@@ -49,11 +56,13 @@ module Eloqua
       # 3. Email
       # 4. External Action
       def client(type)
-        if(!Eloqua.user || !Eloqua.password)
-          raise('Eloqua.user or Eloqua.password is not set see Eloqua.authenticate')
+        if(!Eloqua.user || !Eloqua.password || !Eloqua.domain)
+          raise('Eloqua.user or Eloqua.password or Eloqua.endpoint is not set see Eloqua.authenticate')
         end
+
         clients[type] = Savon::Client.new do
           wsdl.document = WSDL[type]
+          wsdl.endpoint = "https://#{Eloqua.domain}#{ENDPOINT_PATH[type]}"
           wsse.credentials Eloqua.user, Eloqua.password
         end
       end

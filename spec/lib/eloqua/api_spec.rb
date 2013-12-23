@@ -9,14 +9,14 @@ describe Eloqua::Api do
   before do
     subject.reset_clients
   end
-  
+
   context '#builder' do
-    
+
     it 'should call Eloqua::Builder::Xml.create' do
       flexmock(Eloqua::Builder::Xml).should_receive(:create).once
       subject.builder
     end
-        
+
   end
 
   context "#request" do
@@ -41,17 +41,17 @@ describe Eloqua::Api do
       it "should have stored response in #last_request" do
         subject.last_request.should_not be_blank
       end
-      
+
 
     end
 
   end
-  
+
   context "#raise_response_errors" do
 
     context "when response given is an HTTP error" do
       it "should raise Eloqua::HTTPError" do
-        
+
       end
     end
 
@@ -67,17 +67,17 @@ describe Eloqua::Api do
   end
 
   context "#client" do
-    
+
     context 'when no Eloqua.user or Eloqua.password is set' do
-      
+
       before do
-        Eloqua.authenticate(nil, nil)
+        Eloqua.authenticate(nil, nil, nil)
       end
-      
+
       it 'should raise RuntimeError about missing user or password' do
         lambda { subject.client(:service) }.should raise_exception(RuntimeError, 'Eloqua.user or Eloqua.password is not set see Eloqua.authenticate')
-      end      
-      
+      end
+
     end
 
     before do
@@ -101,7 +101,7 @@ describe Eloqua::Api do
     end
 
     it "should have an :arr namespace for arrays" do
-      
+
     end
 
   end

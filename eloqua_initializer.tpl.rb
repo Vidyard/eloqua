@@ -1,3 +1,3 @@
 Eloqua.configure do |config|
-  config.authenticate('Company\\User', 'Password')
+  config.authenticate('Company\\User', 'Password', 'Domain')
 end

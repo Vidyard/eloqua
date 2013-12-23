@@ -10,15 +10,17 @@ module Eloqua
   autoload :RemoteObject, 'eloqua/remote_object'
   autoload :Query, 'eloqua/query'
 
-  mattr_accessor :user, :password
+  mattr_accessor :user, :password, :domain
 
   def self.configure(&block)
     yield self
   end
 
-  def self.authenticate(user, password)
+  # Must be passed domain, since it can be a dynamic attribute of an account
+  def self.authenticate(user, password, domain)
     self.user = user
     self.password = password
+    self.domain = domain
   end
 
   def self.format_results_for_array(results, *keys)
