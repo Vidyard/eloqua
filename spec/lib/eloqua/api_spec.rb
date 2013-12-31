@@ -75,7 +75,7 @@ describe Eloqua::Api do
       end
 
       it 'should raise RuntimeError about missing user or password' do
-        lambda { subject.client(:service) }.should raise_exception(RuntimeError, 'Eloqua.user or Eloqua.password is not set see Eloqua.authenticate')
+        lambda { subject.client(:service) }.should raise_exception(RuntimeError, 'Eloqua.user or Eloqua.password or Eloqua.endpoint is not set see Eloqua.authenticate')
       end
 
     end
