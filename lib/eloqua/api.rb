@@ -65,6 +65,9 @@ module Eloqua
           wsdl.endpoint = "https://#{Eloqua.domain}#{ENDPOINT_PATH[type]}"
           wsse.credentials Eloqua.user, Eloqua.password
         end
+        clients[type].http.open_timeout = 30
+        clients[type].http.read_timeout = 30
+        clients[type]
       end
 
       def builder(&block)
